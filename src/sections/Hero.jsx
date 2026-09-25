@@ -33,7 +33,6 @@ const staggerContainer = {
   }
 };
 
-// Typewriter effect hook with multiple phrases
 const useTypewriter = (phrases, speed = 100, delay = 2000) => {
   const [displayText, setDisplayText] = useState('');
   const timeoutRef = useRef(null);
@@ -43,7 +42,6 @@ const useTypewriter = (phrases, speed = 100, delay = 2000) => {
   const speedRef = useRef(speed);
   const delayRef = useRef(delay);
 
-  // Update refs when props change
   useEffect(() => {
     phrasesRef.current = phrases;
     speedRef.current = speed;
@@ -63,24 +61,21 @@ const useTypewriter = (phrases, speed = 100, delay = 2000) => {
       const currentDelay = delayRef.current;
       
       if (isDeleting) {
-        // Deleting text
         if (currentIndex > 0) {
           setDisplayText(currentPhrase.slice(0, currentIndex - 1));
           currentIndex--;
-          timeoutRef.current = setTimeout(typeNextChar, currentSpeed / 2); // Faster deletion
+          timeoutRef.current = setTimeout(typeNextChar, currentSpeed / 2);
         } else {
           isDeleting = false;
           phraseIndexRef.current = (phraseIndexRef.current + 1) % phrasesRef.current.length;
-          timeoutRef.current = setTimeout(typeNextChar, 500); // Pause before typing next
+          timeoutRef.current = setTimeout(typeNextChar, 500);
         }
       } else {
-        // Typing text
         if (currentIndex < currentPhrase.length) {
           setDisplayText(currentPhrase.slice(0, currentIndex + 1));
           currentIndex++;
           timeoutRef.current = setTimeout(typeNextChar, currentSpeed);
         } else {
-          // Pause before deleting
           timeoutRef.current = setTimeout(() => {
             isDeleting = true;
             typeNextChar();
@@ -89,7 +84,6 @@ const useTypewriter = (phrases, speed = 100, delay = 2000) => {
       }
     };
 
-    // Start after initial delay
     timeoutRef.current = setTimeout(typeNextChar, 2000);
 
     return () => {
@@ -98,7 +92,7 @@ const useTypewriter = (phrases, speed = 100, delay = 2000) => {
         clearTimeout(timeoutRef.current);
       }
     };
-  }, []); // Empty dependency array since we use refs
+  }, []);
 
   return { displayText };
 };

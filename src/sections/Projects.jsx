@@ -171,7 +171,7 @@ const Projects = () => {
                 </div>
                 <div className="flex items-center justify-between pt-3 border-t border-white/20 text-xs text-gray-400">
                   <span className="flex items-center gap-1.5">
-                    <span className="w-2.5 h-2.5 rounded-full bg-white" />
+                    <span className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: project.languages[0].color }} />
                     {project.languages[0].name}
                   </span>
                   <span>Updated {project.updated}</span>
