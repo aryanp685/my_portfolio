@@ -1,0 +1,86 @@
+@import "tailwindcss";
+
+@theme {
+  --color-background: #000000;
+  --color-foreground: #FFFFFF;
+  --color-card: #0A0A0A;
+  --color-primary: #FFFFFF;
+  --color-primary-foreground: #000000;
+  --color-secondary: #111111;
+  --color-secondary-foreground: #FFFFFF;
+  --color-muted: #1A1A1A;
+  --color-muted-foreground: #888888;
+  --color-border: #222222;
+  --radius: 0.75rem;
+  --color-highlight: #FFFFFF;
+  --color-surface: #0D0D0D;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: #000000;
+    color: var(--color-foreground);
+    font-family: "Inter", sans-serif;
+  }
+
+  .font-serif {
+    font-family: "Playfair Display", serif;
+  }
+}
+
+@layer components {
+  .glass {
+    background: linear-gradient(135deg,
+        rgba(255, 255, 255, 0.05),
+        rgba(255, 255, 255, 0.02));
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 0 40px rgba(255, 255, 255, 0.05);
+  }
+
+  .glass-strong {
+    background-color: color-mix (in srgb, var(--color-surface) 85%, transparent);
+    backdrop-filter: blur(24px);
+    border: 1px solid color-mix (in srgb, var(--color-border) 70%, transparent);
+  }
+
+  .gradient-text {
+    background: linear-gradient(90deg, #FFFFFF, #AAAAAA);
+    -webkit-background-clip: text;
+    color: transparent;
+  }
+
+  .glow-text {
+    text-shadow: 0 0 40px color-mix(in srgb, var(--color-primary) 50%, transparent);
+  }
+
+  .glow-border {
+    box-shadow: 0 0 20px color-mix(in srgb, var(--color-primary) 15%, transparent),
+      inset 0 0 20px color-mix (in srgb, var(--color-primary) 3%, transparent)
+  }
+
+  @layer utilities {
+    .animate-fade-in {
+      opacity: 0;
+      transform: translateY(24px);
+      filter: blur(8px);
+      transition: opacity 0.9s ease, transform 0.9s ease, filter 0.9s ease;
+    }
+
+    .animate-fade-in.in-view {
+      opacity: 1;
+      transform: translateY(0);
+      filter: blur(0);
+    }
+
+    .timeline-glow {
+      box-shadow: 0 0 40px color-mix(in srgb, var(--color-primary) 35%, transparent),
+        0 0 80px color-mix(in srgb, var(--color-primary) 25%, transparent);
+    }
+  }
+}
